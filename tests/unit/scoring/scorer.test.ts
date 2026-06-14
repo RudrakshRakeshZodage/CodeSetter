@@ -35,7 +35,7 @@ describe('computeScore', () => {
     expect(report.overall).toBeLessThanOrEqual(100);
   });
 
-  it('should give security higher weight than accessibility', () => {
+  it('should give all categories equal weight', () => {
     const highSecurity = computeScore([
       makeScanResult('security', 100),
       makeScanResult('accessibility', 0),
@@ -45,9 +45,8 @@ describe('computeScore', () => {
       makeScanResult('accessibility', 100),
     ]);
 
-    // Security has weight 0.25 vs accessibility 0.1 (with unscored as 100)
-    // Higher security should yield higher overall
-    expect(highSecurity.overall).toBeGreaterThan(highAccessibility.overall);
+    // Weights are now equal, so overall scores should be identical
+    expect(highSecurity.overall).toBe(highAccessibility.overall);
   });
 
   it('should return grade A+ for score >= 97', () => {

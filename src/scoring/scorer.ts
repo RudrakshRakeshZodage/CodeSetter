@@ -1,12 +1,12 @@
 import { ScanResult, ScoreReport, SubScore, ScoreWeights, Category, Grade } from '../types/index.js';
 
 const DEFAULT_WEIGHTS: ScoreWeights = {
-  quality: 0.2,
-  security: 0.25,
-  performance: 0.2,
-  accessibility: 0.1,
-  testing: 0.15,
-  architecture: 0.1,
+  quality:       0.1667,
+  security:      0.1667,
+  performance:   0.1667,
+  accessibility: 0.1667,
+  testing:       0.1667,
+  architecture:  0.1665, // slightly less to sum exactly to 1.0
 };
 
 /**

@@ -1,59 +1,72 @@
 import path from 'path';
 import { AuditReport, ReportFormat } from '../types/index.js';
 import { writeFile, ensureDir } from '../utils/file-utils.js';
-import { generateHtmlReport } from './html-reporter.js';
 import { generateJsonReport } from './json-reporter.js';
 import { generateMarkdownReport } from './markdown-reporter.js';
+import { generatePdfReport } from './pdf-reporter.js';
 
 export interface ReportManagerOptions {
-  formats: ReportFormat[];
+  formats: Array<ReportFormat | 'pdf'>;
   outputDir: string;
   filename?: string;
 }
 
 export interface ReportPaths {
-  html?: string;
   json?: string;
   markdown?: string;
+  pdf?: string;
 }
 
 /**
- * Generate and write all requested report formats to the output directory.
+ * Generate and write all requested report formats into separate sub-directories:
+ *   <outputDir>/json/audit-report.json
+ *   <outputDir>/markdown/audit-report.md
+ *   <outputDir>/pdf/audit-report.pdf
  */
 export async function generateReports(
   report: AuditReport,
   options: ReportManagerOptions
 ): Promise<ReportPaths> {
   const { formats, outputDir, filename = 'audit-report' } = options;
-
-  await ensureDir(outputDir);
-
   const paths: ReportPaths = {};
 
   for (const format of formats) {
-    let content: string;
-    let ext: string;
-
     switch (format) {
-      case 'html':
-        content = generateHtmlReport(report);
-        ext = 'html';
+      case 'json': {
+        const dir = path.join(outputDir, 'json');
+        await ensureDir(dir);
+        const filePath = path.join(dir, `${filename}.json`);
+        await writeFile(filePath, generateJsonReport(report));
+        paths.json = filePath;
         break;
-      case 'json':
-        content = generateJsonReport(report);
-        ext = 'json';
-        break;
-      case 'markdown':
-        content = generateMarkdownReport(report);
-        ext = 'md';
-        break;
-      default:
-        continue;
-    }
+      }
 
-    const filePath = path.join(outputDir, `${filename}.${ext}`);
-    await writeFile(filePath, content);
-    paths[format] = filePath;
+      case 'markdown': {
+        const dir = path.join(outputDir, 'markdown');
+        await ensureDir(dir);
+        const filePath = path.join(dir, `${filename}.md`);
+        await writeFile(filePath, generateMarkdownReport(report));
+        paths.markdown = filePath;
+        break;
+      }
+
+      case 'pdf': {
+        const dir = path.join(outputDir, 'pdf');
+        const filePath = path.join(dir, `${filename}.pdf`);
+        await generatePdfReport(report, filePath);
+        paths.pdf = filePath;
+        break;
+      }
+
+      // Legacy 'html' format mapped to pdf for this version
+      case 'html': {
+        const dir = path.join(outputDir, 'pdf');
+        const filePath = path.join(dir, `${filename}.pdf`);
+        await generatePdfReport(report, filePath);
+        paths.pdf = filePath;
+        break;
+      }
+    }
   }
 
   return paths;

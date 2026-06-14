@@ -11,6 +11,7 @@ import { registerDependenciesCommand } from './commands/dependencies.js';
 import { registerScoreCommand } from './commands/score.js';
 import { registerReportCommand } from './commands/report.js';
 import { registerFixCommand } from './commands/fix.js';
+import { registerInitCommand } from './commands/init.js';
 
 // Read version from package.json
 const _require = createRequire(import.meta.url);
@@ -31,21 +32,25 @@ program
   .addHelpText(
     'before',
     `
-  ⚡ CodeSetter — AI-Powered Code Auditor v${version}
+  ⚡ CodeSetter v${version} — By Rudraksh Zodage
   ─────────────────────────────────────────────────
-  Scan any repository for quality, security, performance,
-  accessibility, testing, and architecture issues.
+  AI-powered code audit: quality · security · performance
+  accessibility · testing · architecture
 
-  Examples:
-    codesetter audit ./
-    codesetter security ./src
+  Quick Start:
+    codesetter init          ← interactive setup (run first!)
+    codesetter audit ./      ← full audit + PDF/JSON/MD reports
+    codesetter fix ./        ← auto-apply fixes to your codebase
+    codesetter score ./      ← quick score overview
+
+  With AI:
     codesetter audit --ai gemini --key YOUR_KEY
-    codesetter report --format html,json
-    codesetter fix --ai openai
+    codesetter fix   --ai openai --key sk-...
 `
   );
 
 // Register all commands
+registerInitCommand(program);
 registerAuditCommand(program);
 registerQualityCommand(program);
 registerSecurityCommand(program);

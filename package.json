@@ -1,6 +1,6 @@
 {
   "name": "codesetter",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "AI-powered repository auditing and optimization toolkit — scan any codebase for quality, security, performance, accessibility, testing, and architecture issues.",
   "keywords": [
     "code-quality",
@@ -75,6 +75,7 @@
   },
   "dependencies": {
     "@google/generative-ai": "^0.21.0",
+    "@types/pdfkit": "^0.17.6",
     "axios": "^1.7.9",
     "chalk": "^4.1.2",
     "commander": "^12.1.0",
@@ -83,6 +84,7 @@
     "glob": "^10.4.5",
     "openai": "^4.77.0",
     "ora": "^5.4.1",
+    "pdfkit": "^0.19.1",
     "ts-morph": "^23.0.0"
   },
   "devDependencies": {
