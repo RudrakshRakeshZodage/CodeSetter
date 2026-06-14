@@ -72,7 +72,11 @@ npm install codesetter --save-dev
 To instantly audit your current working directory and generate a report, simply run:
 
 ```bash
+# Basic audit
 codesetter audit
+
+# AI-powered audit (Recommended)
+codesetter audit --ai gemini --key YOUR_API_KEY
 ```
 
 This will run all 6 scanners, display a progress terminal output, and create a `.codesetter/reports` directory containing your HTML, JSON, and MD reports.
