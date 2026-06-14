@@ -75,8 +75,11 @@ To instantly audit your current working directory and generate a report, simply 
 # Basic audit
 codesetter audit
 
-# AI-powered audit (Recommended)
+# AI-powered audit with Gemini (Free Tier available)
 codesetter audit --ai gemini --key YOUR_API_KEY
+
+# AI-powered audit with OpenAI
+codesetter audit --ai openai --key YOUR_OPENAI_KEY
 ```
 
 This will run all 6 scanners, display a progress terminal output, and create a `.codesetter/reports` directory containing your HTML, JSON, and MD reports.

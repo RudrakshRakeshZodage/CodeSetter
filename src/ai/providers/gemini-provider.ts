@@ -14,7 +14,7 @@ export class GeminiProvider implements AIProviderClient {
     const apiKey = this.config.apiKey ?? process.env.GEMINI_API_KEY ?? '';
     const genAI = new GoogleGenerativeAI(apiKey);
     const model = genAI.getGenerativeModel({
-      model: this.config.model ?? 'gemini-1.5-flash',
+      model: this.config.model ?? 'gemini-2.5-flash',
       generationConfig: {
         responseMimeType: 'application/json',
         maxOutputTokens: this.config.maxTokens ?? 4096,
