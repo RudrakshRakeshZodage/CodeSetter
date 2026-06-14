@@ -78,7 +78,13 @@ export async function loadConfig(
               },
             }
           : undefined,
-        report: rc.report,
+        report: rc.report
+          ? {
+              formats: rc.report.formats ?? DEFAULT_CONFIG.report.formats,
+              output: rc.report.output ?? DEFAULT_CONFIG.report.output,
+              open: rc.report.open,
+            }
+          : undefined,
         plugins: rc.plugins,
       };
     }
@@ -102,9 +108,18 @@ export async function loadConfig(
       },
     },
     report: {
-      ...DEFAULT_CONFIG.report,
-      ...fileConfig.report,
-      ...overrides.report,
+      formats:
+        overrides.report?.formats ??
+        fileConfig.report?.formats ??
+        DEFAULT_CONFIG.report.formats,
+      output:
+        overrides.report?.output ??
+        fileConfig.report?.output ??
+        DEFAULT_CONFIG.report.output,
+      open:
+        overrides.report?.open ??
+        fileConfig.report?.open ??
+        DEFAULT_CONFIG.report.open,
     },
     ignore: [
       ...(DEFAULT_CONFIG.ignore ?? []),

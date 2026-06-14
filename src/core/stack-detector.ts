@@ -47,7 +47,7 @@ export async function detectStack(dir: string): Promise<StackInfo> {
   }
   // React
   else if (hasDep('react', 'react-dom')) {
-    if (primary !== 'nextjs') primary = 'react';
+    primary = 'react';
     frameworks.push('React');
   }
   // Vue

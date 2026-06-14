@@ -40,19 +40,19 @@
   },
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",
-      "require": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "require": "./dist/index.js"
     },
     "./scanners": {
+      "types": "./dist/scanners/index.d.ts",
       "import": "./dist/scanners/index.mjs",
-      "require": "./dist/scanners/index.js",
-      "types": "./dist/scanners/index.d.ts"
+      "require": "./dist/scanners/index.js"
     },
     "./ai": {
+      "types": "./dist/ai/index.d.ts",
       "import": "./dist/ai/index.mjs",
-      "require": "./dist/ai/index.js",
-      "types": "./dist/ai/index.d.ts"
+      "require": "./dist/ai/index.js"
     }
   },
   "files": [
