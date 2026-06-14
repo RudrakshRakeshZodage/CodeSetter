@@ -12,7 +12,7 @@ export type Category =
   | 'architecture'
   | 'dependencies';
 
-export type ReportFormat = 'html' | 'json' | 'markdown';
+export type ReportFormat = 'html' | 'json' | 'markdown' | 'pdf';
 export type AIProvider = 'openai' | 'gemini' | 'ollama';
 export type Grade = 'A+' | 'A' | 'A-' | 'B+' | 'B' | 'B-' | 'C+' | 'C' | 'C-' | 'D' | 'F';
 

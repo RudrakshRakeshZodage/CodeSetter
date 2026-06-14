@@ -37,6 +37,7 @@ export async function generatePdfReport(
   return new Promise((resolve, reject) => {
     const doc = new PDFDocument({
       size: 'A4',
+      bufferPages: true,
       margins: { top: 60, bottom: 60, left: 60, right: 60 },
       info: {
         Title: 'CodeSetter Audit Report',
@@ -71,7 +72,7 @@ export async function generatePdfReport(
     }
 
     // ─── Footer on all pages ─────────────────────────────────────────────────
-    const pageCount = (doc as PDFDocument & { _pageCount?: number })._pageCount ?? 1;
+    const pageCount = (doc as PDFKit.PDFDocument & { _pageCount?: number })._pageCount ?? 1;
     for (let i = 0; i < pageCount; i++) {
       doc.switchToPage(i);
       drawPageFooter(doc, i + 1);

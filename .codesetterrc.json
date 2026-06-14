@@ -1,0 +1,51 @@
+{
+  "ignore": [
+    "node_modules",
+    "dist",
+    "build",
+    ".next",
+    "coverage"
+  ],
+  "severity": "low",
+  "scanners": {
+    "quality": {
+      "enabled": true
+    },
+    "security": {
+      "enabled": true
+    },
+    "performance": {
+      "enabled": true
+    },
+    "accessibility": {
+      "enabled": true
+    },
+    "testing": {
+      "enabled": true
+    },
+    "architecture": {
+      "enabled": true
+    }
+  },
+  "scoring": {
+    "weights": {
+      "quality": 0.1667,
+      "security": 0.1667,
+      "performance": 0.1667,
+      "accessibility": 0.1667,
+      "testing": 0.1667,
+      "architecture": 0.1665
+    }
+  },
+  "report": {
+    "formats": [
+      "pdf",
+      "json",
+      "markdown"
+    ],
+    "output": ".codesetter/reports"
+  },
+  "ai": {
+    "provider": "ollama"
+  }
+}

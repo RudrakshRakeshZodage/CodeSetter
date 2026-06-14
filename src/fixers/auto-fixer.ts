@@ -75,8 +75,8 @@ function buildChange(issue: Issue, line: string): string | null {
       // Comment out console.log/debug/info
       return line.replace(/^(\s*)(.*)$/, '$1// $2 // TODO: use a proper logger');
 
-    case 'no-debugger':
-      // Remove debugger statement entirely
+    case 'no-':
+      // Remove statement entirely
       return line.replace(/\bdebugger\b\s*;?/, '').trimEnd();
 
     case 'img-alt':

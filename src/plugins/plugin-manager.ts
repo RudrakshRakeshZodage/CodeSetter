@@ -1,5 +1,6 @@
 import { CodeSetterPlugin, ScanResult, CodeSetterConfig, Category } from '../types/index.js';
 import { logger } from '../utils/logger.js';
+import { glob } from 'glob';
 
 class PluginManager {
   private plugins: Map<string, CodeSetterPlugin> = new Map();
@@ -40,8 +41,7 @@ class PluginManager {
     for (const plugin of this.plugins.values()) {
       try {
         const start = Date.now();
-        const { default: glob } = await import('glob');
-        const files = (await glob.glob('**/*.{ts,tsx,js,jsx}', {
+        const files = (await glob('**/*.{ts,tsx,js,jsx}', {
           cwd: config.path,
           absolute: true,
           ignore: ['**/node_modules/**', '**/dist/**'],

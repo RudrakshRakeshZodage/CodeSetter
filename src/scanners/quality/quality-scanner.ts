@@ -74,15 +74,15 @@ export class QualityScanner {
         // ─── Debugger statement ──────────────────────────────────────────────
         if (DEBUGGER_PATTERN.test(line)) {
           issues.push({
-            id: `quality-debugger-${relFile}-${idx}`,
+            id: `quality--${relFile}-${idx}`,
             category: 'quality',
             severity: 'medium',
             title: 'Debugger Statement',
             description: 'Debugger statement left in production code.',
             location: { file: relFile, line: idx + 1 },
-            rule: 'no-debugger',
+            rule: 'no-',
             fix: {
-              description: 'Remove the debugger statement',
+              description: 'Remove the statement',
               before: line.trim(),
               after: '',
               automated: true,

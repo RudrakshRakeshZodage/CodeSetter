@@ -49,6 +49,8 @@ program
 `
   );
 
+import { registerWatchCommand } from './commands/watch.js';
+
 // Register all commands
 registerInitCommand(program);
 registerAuditCommand(program);
@@ -62,5 +64,6 @@ registerDependenciesCommand(program);
 registerScoreCommand(program);
 registerReportCommand(program);
 registerFixCommand(program);
+registerWatchCommand(program);
 
 program.parse(process.argv);
