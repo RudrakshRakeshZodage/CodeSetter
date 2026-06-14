@@ -1,6 +1,6 @@
 {
   "name": "codesetter",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "AI-powered repository auditing and optimization toolkit — scan any codebase for quality, security, performance, accessibility, testing, and architecture issues.",
   "keywords": [
     "code-quality",
