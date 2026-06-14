@@ -5,120 +5,127 @@
     <a href="https://www.npmjs.com/package/codesetter"><img src="https://img.shields.io/npm/v/codesetter?color=0ea5e9&label=npm" alt="npm version" /></a>
     <a href="https://www.npmjs.com/package/codesetter"><img src="https://img.shields.io/npm/dm/codesetter?color=8b5cf6" alt="downloads" /></a>
     <a href="https://github.com/RudrakshRakeshZodage/CodeSetter/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-green" alt="license" /></a>
-    <a href="https://github.com/RudrakshRakeshZodage/CodeSetter/actions"><img src="https://img.shields.io/github/actions/workflow/status/RudrakshRakeshZodage/CodeSetter/publish.yml?label=CI" alt="CI" /></a>
     <img src="https://img.shields.io/badge/TypeScript-5.x-3178C6?logo=typescript" alt="TypeScript" />
     <img src="https://img.shields.io/badge/node-%3E%3D18-brightgreen?logo=node.js" alt="Node.js" />
   </p>
+  <p>Scan any JavaScript/TypeScript repository and produce actionable scores, reports, and AI-powered fix suggestions across <strong>6 deep dimensions</strong>: Code Quality, Security, Performance, Accessibility, Testing, and Architecture.</p>
 </div>
 
 ---
 
-CodeSetter scans any JavaScript/TypeScript repository and produces actionable scores, reports, and AI-powered fix suggestions across **6 dimensions**: Code Quality, Security, Performance, Accessibility, Testing, and Architecture.
+## 📑 Table of Contents
+
+- [✨ Features](#-features)
+- [📦 Installation](#-installation)
+- [🚀 Quick Start](#-quick-start)
+- [📋 CLI Commands & Usage](#-cli-commands--usage)
+- [📊 Understanding the Output](#-understanding-the-output)
+- [🤖 AI Integration](#-ai-integration)
+- [⚙️ Configuration File](#️-configuration-file)
+- [💻 SDK (Programmatic Usage)](#-sdk-programmatic-usage)
+- [🔌 Plugin System](#-plugin-system)
+- [🛡️ What We Scan For](#️-what-we-scan-for)
+
+---
 
 ## ✨ Features
 
-- 🔍 **6 Deep Scanners** — AST-based analysis with ts-morph
-- 🤖 **AI Integration** — OpenAI, Gemini, and Ollama support
-- 📊 **Scoring System** — Weighted 0–100 score with grades
-- 📄 **Multi-format Reports** — HTML, JSON, Markdown
-- 🛠️ **Auto-fix Suggestions** — Actionable fix hints per issue
-- 🔌 **Plugin System** — Register custom scanners
-- 🖥️ **CLI + SDK** — Use from terminal or import programmatically
-- ⚡ **Zero-config** — Works out of the box on any repo
+- 🔍 **6 Deep Scanners** — AST-based analysis utilizing `ts-morph` for extreme precision.
+- 🤖 **AI Integration** — Supports **OpenAI**, **Gemini**, and **Ollama** (for local/offline processing) to suggest code fixes.
+- 📊 **Scoring System** — Generates a weighted 0–100 score with grades for your entire project.
+- 📄 **Multi-format Reports** — Exports beautifully formatted HTML, JSON, and Markdown reports.
+- 🛠️ **Auto-fix Suggestions** — Get actionable, line-by-line fix hints for every detected issue.
+- ⚡ **Zero-config** — Works directly out of the box on any JavaScript, TypeScript, React, Next.js, or Node.js repository.
+
+---
 
 ## 📦 Installation
 
+CodeSetter can be installed globally for CLI use or as a dependency in your project for API/SDK usage.
+
+### Global CLI Installation (Recommended)
+
 ```bash
-# Global CLI
 npm install -g codesetter
-
-# Or use directly with npx
-npx codesetter audit ./
-
-# As a project dependency (SDK)
-npm install codesetter
 ```
+
+*Alternatively, run it instantly without installing globally:*
+```bash
+npx codesetter audit ./
+```
+
+### Local Project Installation
+
+```bash
+npm install codesetter --save-dev
+```
+
+---
 
 ## 🚀 Quick Start
 
-### CLI
+To instantly audit your current working directory and generate a report, simply run:
 
 ```bash
-# Full audit of current directory
 codesetter audit
-
-# Run a specific scanner
-codesetter security ./src
-codesetter quality ./src
-codesetter performance ./
-
-# View overall score
-codesetter score
-
-# Generate reports (HTML + JSON + Markdown)
-codesetter report
-
-# Show AI-powered fix suggestions (requires API key)
-codesetter fix --ai openai
-
-# Audit with AI insights
-codesetter audit --ai gemini --key YOUR_KEY
 ```
 
-### SDK (Programmatic)
+This will run all 6 scanners, display a progress terminal output, and create a `.codesetter/reports` directory containing your HTML, JSON, and MD reports.
 
-```typescript
-import { auditProject, scanSecurity, scanQuality, generateReport } from 'codesetter';
+---
 
-// Full audit
-const report = await auditProject('./');
-console.log(report.score.overall); // 91
+## 📋 CLI Commands & Usage
 
-// Single scanner
-const securityResult = await scanSecurity('./src');
-console.log(securityResult.issues); // [...issues]
+CodeSetter provides a robust command-line interface.
 
-// Generate HTML report
-await generateReport(report, { formats: ['html', 'json', 'markdown'] });
+### The `audit` Command
+Run a full audit across all available scanners.
+```bash
+codesetter audit [path] [options]
+
+# Example: Audit the src folder and ignore test files
+codesetter audit ./src --ignore "*.test.ts"
 ```
 
-## 📋 CLI Commands
-
-| Command | Description |
-|---------|-------------|
-| `codesetter audit [path]` | Run full audit across all scanners |
-| `codesetter quality [path]` | Code quality scan only |
-| `codesetter security [path]` | Security vulnerability scan |
-| `codesetter performance [path]` | Performance analysis |
-| `codesetter accessibility [path]` | Accessibility audit |
-| `codesetter testing [path]` | Test coverage analysis |
-| `codesetter architecture [path]` | Architecture & structure analysis |
-| `codesetter dependencies [path]` | Dependency vulnerability check |
-| `codesetter score [path]` | Show score summary |
-| `codesetter report [path]` | Generate HTML/JSON/MD reports |
-| `codesetter fix [path]` | Show AI-powered fix suggestions |
-
-### CLI Options
-
-```
-Options:
-  -p, --path <path>        Target directory (default: "./")
-  -f, --format <formats>   Report formats: html,json,md (default: "html,json,md")
-  -o, --output <dir>       Output directory (default: ".codesetter/reports")
-  --ai <provider>          AI provider: openai | gemini | ollama
-  --key <apiKey>           AI API key
-  --model <model>          AI model name
-  --ignore <patterns>      Comma-separated glob patterns to ignore
-  --no-ai                  Disable AI suggestions
-  --json                   Output results as JSON (CI-friendly)
-  --severity <level>       Min severity to report: low|medium|high|critical
-  -v, --version            Show version
-  -h, --help               Show help
+### Individual Scanners
+If you only want to check a specific metric, you can run individual scanners:
+```bash
+codesetter quality [path]       # Check code quality and complexity
+codesetter security [path]      # Scan for vulnerabilities and secrets
+codesetter performance [path]   # Identify performance bottlenecks
+codesetter accessibility [path] # Check a11y compliance
+codesetter testing [path]       # Analyze test coverage
+codesetter architecture [path]  # Check folder structure and dependencies
 ```
 
-## 📊 Sample Output
-
+### Reporting & Utility Commands
+```bash
+codesetter score [path]         # Output a quick summary score without full reports
+codesetter report [path]        # Re-generate HTML/JSON/MD reports from the last scan
+codesetter fix [path]           # Request AI-powered fix suggestions for found issues
 ```
+
+### Global Options
+
+| Option | Description | Example |
+|--------|-------------|---------|
+| `-p, --path <path>` | Target directory to scan. | `-p ./src` |
+| `-f, --format <list>` | Formats to generate: `html,json,md`. | `-f html,md` |
+| `-o, --output <dir>` | Directory to save reports. | `-o ./my-reports` |
+| `--ai <provider>` | AI Provider to use (`openai`, `gemini`, `ollama`). | `--ai gemini` |
+| `--key <apiKey>` | API key for the chosen AI provider. | `--key AIzaSy...` |
+| `--model <model>` | Specific AI model to use. | `--model gpt-4o` |
+| `--ignore <glob>` | Comma-separated glob patterns to ignore. | `--ignore "dist,node_modules"` |
+| `--severity <level>` | Minimum issue severity to report (`low`, `medium`, `high`, `critical`). | `--severity high` |
+| `--json` | Force standard output as JSON (CI-friendly). | `--json` |
+
+---
+
+## 📊 Understanding the Output
+
+When you run an audit, CodeSetter gives you a high-level console summary:
+
+```text
 ⚡ CodeSetter — AI-Powered Code Audit
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 📁 Scanning: ./src  (47 files, TypeScript + React)
@@ -141,50 +148,49 @@ Options:
   Architecture   █████████░  88/100
 
 📄 Reports saved to .codesetter/reports/
-   → audit-report.html
-   → audit-report.json
-   → audit-report.md
 ```
 
-## 🤖 AI Configuration
+Open `.codesetter/reports/audit-report.html` in your browser for a beautiful, detailed breakdown of every single issue found!
 
-CodeSetter supports three AI providers:
+---
 
-### OpenAI
+## 🤖 AI Integration
 
+CodeSetter uses AI to suggest fixes for complex architectural, security, and quality issues.
+
+### 1. Google Gemini
 ```bash
-codesetter audit --ai openai --key sk-...
-# or set environment variable
-export OPENAI_API_KEY=sk-...
-codesetter audit --ai openai
-```
-
-### Google Gemini
-
-```bash
-export GEMINI_API_KEY=AIza...
+export GEMINI_API_KEY="your-gemini-key"
 codesetter audit --ai gemini
 ```
 
-### Ollama (local, free)
-
+### 2. OpenAI
 ```bash
-# Make sure Ollama is running
-ollama serve
+export OPENAI_API_KEY="sk-..."
+codesetter audit --ai openai
+```
+
+### 3. Ollama (100% Free & Local)
+Don't want to send code to the cloud? Use Ollama!
+1. Start Ollama: `ollama serve`
+2. Run CodeSetter:
+```bash
 codesetter audit --ai ollama --model codellama
 ```
 
+---
+
 ## ⚙️ Configuration File
 
-Create `.codesetterrc.json` in your project root:
+To avoid typing out options every time, create a `.codesetterrc.json` file in your project root:
 
 ```json
 {
-  "ignore": ["node_modules", "dist", "*.test.ts"],
+  "ignore": ["node_modules", "dist", "build", "*.test.ts"],
   "severity": "medium",
   "ai": {
     "provider": "gemini",
-    "model": "gemini-pro"
+    "model": "gemini-1.5-pro"
   },
   "scanners": {
     "quality": true,
@@ -194,16 +200,6 @@ Create `.codesetterrc.json` in your project root:
     "testing": true,
     "architecture": true
   },
-  "scoring": {
-    "weights": {
-      "quality": 0.2,
-      "security": 0.25,
-      "performance": 0.2,
-      "accessibility": 0.1,
-      "testing": 0.15,
-      "architecture": 0.1
-    }
-  },
   "report": {
     "formats": ["html", "json", "markdown"],
     "output": ".codesetter/reports"
@@ -211,84 +207,74 @@ Create `.codesetterrc.json` in your project root:
 }
 ```
 
+---
+
+## 💻 SDK (Programmatic Usage)
+
+You can build your own tools on top of CodeSetter's engine!
+
+```typescript
+import { auditProject, scanSecurity, generateReport } from 'codesetter';
+
+async function main() {
+  // 1. Run a full audit
+  const report = await auditProject('./src', {
+    ignore: ['**/tests/**']
+  });
+  
+  console.log(`Overall Score: ${report.score.overall}`);
+
+  // 2. Or, run a specific scanner directly
+  const securityResult = await scanSecurity('./src');
+  console.log('Security Issues:', securityResult.issues);
+
+  // 3. Generate Reports manually
+  await generateReport(report, {
+    formats: ['html', 'json'],
+    outputDir: './audit-results'
+  });
+}
+
+main();
+```
+
+---
+
 ## 🔌 Plugin System
 
-Register custom scanners:
+Need to enforce custom company rules? Register a custom scanner plugin!
 
 ```typescript
 import { registerPlugin } from 'codesetter';
 
 registerPlugin({
-  name: 'my-custom-scanner',
+  name: 'company-naming-conventions',
   async scan(files, config) {
+    // Implement your AST analysis here...
     return {
-      issues: [],
-      score: 100,
+      issues: [
+        { message: 'Variable does not follow company rules', file: 'app.ts', line: 10 }
+      ],
+      score: 85,
     };
   },
 });
 ```
 
-## 🧪 Supported Stacks
+---
 
-| Stack | Detection | Specialized Analysis |
-|-------|-----------|---------------------|
-| JavaScript | ✅ | ✅ |
-| TypeScript | ✅ | ✅ |
-| React | ✅ | ✅ Re-renders, hooks |
-| Next.js | ✅ | ✅ SSR/SSG patterns |
-| Node.js / Express | ✅ | ✅ Middleware, async |
-| NestJS | ✅ | ✅ DI, decorators |
-| Vue | ✅ | ✅ |
-| Angular | ✅ | ✅ |
+## 🛡️ What We Scan For
 
-## 🛡️ What's Scanned
-
-### Security Scanner
-- Hardcoded API keys, JWT secrets, database credentials
-- SQL injection, XSS, CSRF, command injection patterns
-- Unsafe `eval()` usage
-- `npm audit` dependency vulnerabilities
-
-### Quality Scanner
-- Unused imports/variables (AST-based)
-- Dead code detection
-- Cyclomatic complexity per function
-- Long methods (>50 lines), large files (>500 lines)
-- Deep nesting (>4 levels)
-- SOLID principle violations
-
-### Performance Scanner
-- Heavy bundle dependencies
-- Expensive nested loops
-- Missing `React.memo`, `useMemo`, `useCallback`
-- Missing route lazy-loading
-- Duplicate API call patterns
-
-### Accessibility Scanner
-- Missing `alt` attributes on images
-- Missing labels for form inputs
-- Missing ARIA attributes
-- Non-semantic HTML patterns
-
-### Testing Scanner
-- Source files without test files
-- Coverage estimation
-- Untested critical modules (auth, API routes, DB)
-
-### Architecture Scanner
-- Folder structure quality
-- Circular dependency detection
-- Layer separation violations
-- Coupling and modularity metrics
-- Design pattern detection
-
-## 📄 License
-
-MIT © [Rudraksh Zodage](https://github.com/RudrakshRakeshZodage)
+*   **Security:** Hardcoded API keys, SQL injection patterns, unsafe `eval()`, exposed JWT secrets.
+*   **Quality:** Unused variables/imports, cyclomatic complexity, dead code, long methods (>50 lines), deep nesting.
+*   **Performance:** Expensive nested loops, duplicate API calls, heavy bundle imports, missing React memoization.
+*   **Accessibility:** Missing `alt` tags, lack of ARIA labels, non-semantic HTML structures.
+*   **Testing:** Untested critical modules, test coverage estimation.
+*   **Architecture:** Circular dependencies, bad folder structures, tight coupling between layers.
 
 ---
 
 <div align="center">
   <p>Made with ❤️ by <a href="https://github.com/RudrakshRakeshZodage">Rudraksh Zodage</a></p>
+  <p>License: MIT</p>
 </div>
