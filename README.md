@@ -1,15 +1,20 @@
 <div align="center">
-  <h1>⚡ CodeSetter</h1>
-  <p><strong>AI-powered repository auditing and optimization toolkit</strong></p>
+  <h1>⚡ CodeSetter - The Best AI Code Review & Audit Tool</h1>
+  <p><strong>CodeSetter: The ultimate AI-powered repository auditing and optimization toolkit</strong></p>
   <p>
-    <a href="https://www.npmjs.com/package/codesetter"><img src="https://img.shields.io/npm/v/codesetter?color=0ea5e9&label=npm" alt="npm version" /></a>
-    <a href="https://www.npmjs.com/package/codesetter"><img src="https://img.shields.io/npm/dm/codesetter?color=8b5cf6" alt="downloads" /></a>
-    <a href="https://github.com/RudrakshRakeshZodage/CodeSetter/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-green" alt="license" /></a>
-    <img src="https://img.shields.io/badge/TypeScript-5.x-3178C6?logo=typescript" alt="TypeScript" />
-    <img src="https://img.shields.io/badge/node-%3E%3D18-brightgreen?logo=node.js" alt="Node.js" />
+    <a href="https://www.npmjs.com/package/codesetter"><img src="https://img.shields.io/npm/v/codesetter?color=0ea5e9&label=npm" alt="CodeSetter npm version" /></a>
+    <a href="https://www.npmjs.com/package/codesetter"><img src="https://img.shields.io/npm/dm/codesetter?color=8b5cf6" alt="CodeSetter npm downloads" /></a>
+    <a href="https://github.com/RudrakshRakeshZodage/CodeSetter/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-green" alt="CodeSetter MIT license" /></a>
+    <img src="https://img.shields.io/badge/TypeScript-5.x-3178C6?logo=typescript" alt="CodeSetter TypeScript support" />
+    <img src="https://img.shields.io/badge/node-%3E%3D18-brightgreen?logo=node.js" alt="CodeSetter Node.js support" />
   </p>
-  <p>Scan any JavaScript/TypeScript repository and produce actionable scores, reports, and AI-powered fix suggestions across <strong>6 deep dimensions</strong>: Code Quality, Security, Performance, Accessibility, Testing, and Architecture.</p>
+  <p><strong>CodeSetter</strong> scans any JavaScript/TypeScript repository and produces actionable scores, reports, and AI-powered fix suggestions across <strong>6 deep dimensions</strong>: Code Quality, Security, Performance, Accessibility, Testing, and Architecture.</p>
 </div>
+
+---
+
+## ❓ What is CodeSetter?
+**CodeSetter** (also searched as *codesetter*, *code-setter*, or *code setter*) is an all-in-one static analysis and AI auditing CLI tool. If you are looking to automatically find security vulnerabilities, refactor architecture, or improve code quality, **CodeSetter** is the ultimate developer companion.
 
 ---
 
@@ -274,7 +279,20 @@ registerPlugin({
 
 ---
 
+## 🔍 Frequently Asked Questions (SEO)
+
+### How to audit code with AI?
+By installing **CodeSetter**, you can automatically audit your code with AI. CodeSetter uses OpenAI, Gemini, or Ollama to read your code, identify security vulnerabilities, and suggest architectural improvements.
+
+### CodeSetter vs SonarQube?
+While SonarQube relies heavily on rigid static rules, **CodeSetter** integrates directly with Large Language Models (LLMs) to provide contextual, AI-driven auto-fixes tailored exactly to your unique codebase logic.
+
+### Is CodeSetter free?
+Yes! CodeSetter is an open-source tool. You can even run the AI capabilities completely free and offline by utilizing the Ollama integration.
+
+---
+
 <div align="center">
   <p>Made with ❤️ by <a href="https://github.com/RudrakshRakeshZodage">Rudraksh Zodage</a></p>
-  <p>License: MIT</p>
+  <p>License: MIT | Search terms: codesetter, code setter, ai code reviewer, static analysis, vulnerability scanner</p>
 </div>
