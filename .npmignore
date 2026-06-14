@@ -1,0 +1,28 @@
+# Source code (not needed by consumers)
+src/
+tests/
+*.test.ts
+*.spec.ts
+
+# Config files
+tsconfig.json
+tsup.config.ts
+eslint.config.js
+.prettierrc
+.github/
+.vscode/
+
+# Dev artifacts
+coverage/
+*.log
+*.tsbuildinfo
+
+# Environment
+.env
+.env.*
+
+# CodeSetter local output
+.codesetter/
+
+# Node modules
+node_modules/
